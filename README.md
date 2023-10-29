@@ -1,4 +1,4 @@
-# Flight Ticket Booking App
+# Flights Ticket Booking App
 This repository contains the frontend code for a simple Flight Ticket Booking mobile application developed using the Flutter framework.
 
 
