@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 
+import '../widgets/double_text_widget.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -72,22 +74,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                SizedBox(height: 40),
                // const Gap(40),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Upcoming Flights",
-                      style: Styles.headLineStyle2,
-                    ),
-                    InkWell( // untuk membuat widget dapat diklik
-                      child: Text(
-                        "View all",
-                        style: Styles.textStyle.copyWith(color: Styles.primaryColor),
-                        // copyWith untuk mengubah style dari text
-                      ),
-                    )
-                  ],
-                )
+                const AppDoubleTextWidget(text1: "Upcoming Flights", text2: "View all"),
               ],
             ),
           ),
@@ -104,22 +91,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(height: 15),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Hotels",
-                  style: Styles.headLineStyle2,
-                ),
-                InkWell( // untuk membuat widget dapat diklik
-                  child: Text(
-                    "View all",
-                    style: Styles.textStyle.copyWith(color: Styles.primaryColor),
-                    // copyWith untuk mengubah style dari text
-                  ),
-                )
-              ],
-            ),
+            child:  const AppDoubleTextWidget(text1: "Hotels", text2: "View all"),
           ),
           SizedBox(height: 15),
           SingleChildScrollView(
