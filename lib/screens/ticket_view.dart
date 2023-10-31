@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 
 class TicketView extends StatelessWidget {
   final Map<String, dynamic> ticket; // untuk menampung data tiket dari app_info_list.dart
-  const TicketView({Key? key, required this.ticket}) : super(key: key);
+  final bool? isColor;  // untuk mengecek apakah memerlukan tiket yg tidak berwarna pada halaman tiket
+  const TicketView({Key? key, required this.ticket, this.isColor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +20,15 @@ class TicketView extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(left: 16),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             /// Showing the blue part of the Card:
             Container(
               decoration: BoxDecoration( // untuk memberikan border pada container
                 borderRadius: const BorderRadius.only(topLeft: Radius.circular(21), topRight: Radius.circular(21)),
-                color: Styles.primaryColor
+                color: isColor==null? Styles.primaryColor:Colors.white
+                // untuk mengecek apabila isColor bernilai null, maka akan menampilkan warna biru pada tiket
+                // jika tidak maka akan menampilkan tiket berwarna putih
               ),
               padding: const EdgeInsets.all(16), 
               child: Column(
@@ -33,11 +37,12 @@ class TicketView extends StatelessWidget {
                     children: [
                       Text(
                         ticket['from']['code'],
-                        style: Styles.headLineStyle3.copyWith(color: Colors.white),
+                        style: isColor == null? Styles.headLineStyle3.copyWith(color: Colors.white): // : -> else
+                                                Styles.headLineStyle3
                         // copyWith untuk mengubah style dari text
                       ),
                       const Spacer(), // untuk membuat jarak antar text (sama sprti Expanded(child: Container()))
-                      ThickContainer(),
+                      isColor==null?ThickContainer():ThickContainer(isColor: true),
                       Expanded(child: Stack( // untuk menumpuk widget
                         children: [
                           SizedBox( // untuk membuat titik-titik pada tiket
@@ -53,7 +58,7 @@ class TicketView extends StatelessWidget {
                                         height: 1,
                                         child: DecoratedBox(
                                           decoration: BoxDecoration(
-                                            color: Colors.white,
+                                            color: isColor==null? Colors.white:Colors.grey.shade300,
                                           ),
                                         )
                                     ),
@@ -65,17 +70,17 @@ class TicketView extends StatelessWidget {
                           Center( // untuk membuat icon pesawat di tengah titik-titik
                               child: Transform.rotate( // Ubah arah dari icon menggunakan Transform.rotate
                                   angle: 1.5,
-                                  child: Icon(Icons.local_airport_rounded, color: Colors.white)
+                                  child: Icon(Icons.local_airport_rounded, color: isColor==null? Colors.white:Color(0xFF8ACCF7))
                               )
                           ),
                         ]
                       ),
                       ),
-                      ThickContainer(),
+                      isColor==null?ThickContainer():ThickContainer(isColor: true),
                       const Spacer(),
                       Text(
                         ticket['to']['code'],
-                        style: Styles.headLineStyle3.copyWith(color: Colors.white),
+                        style: isColor==null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,
                       )
                     ],
                   ),
@@ -86,15 +91,16 @@ class TicketView extends StatelessWidget {
                       SizedBox(
                         width: 100, child: Text(
                         ticket['from']['name'],
-                        style: Styles.headLineStyle4.copyWith(color: Colors.white),
+                        style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,
                       ),
                       ),
-                      Text(ticket['flying_time'], style: Styles.headLineStyle4.copyWith(color: Colors.white)),
+                      Text(ticket['flying_time'], style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white):
+                                                                        Styles.headLineStyle4),
                       SizedBox(
                         width: 100, child: Text(
                         ticket['to']['name'],
                         textAlign: TextAlign.end,
-                        style: Styles.headLineStyle4.copyWith(color: Colors.white),
+                        style: isColor==null?Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,
                       ),
                       ),
                     ],
@@ -104,15 +110,15 @@ class TicketView extends StatelessWidget {
             ),
             /// Showing the middle orange part of the Card:
             Container(
-              color: Styles.orangeColor,
+              color: isColor==null? Styles.orangeColor:Colors.white,
               child: Row(
                 children: [
-                  const SizedBox( // untuk membuat potongan setengah lingkaran pada tiket
+                   SizedBox( // untuk membuat potongan setengah lingkaran pada tiket
                     height: 20,
                     width: 10,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: isColor==null?Colors.grey.shade200:Colors.white,
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(10),
                             bottomRight: Radius.circular(10)
@@ -128,11 +134,11 @@ class TicketView extends StatelessWidget {
                           direction: Axis.horizontal,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           mainAxisSize: MainAxisSize.max,
-                          children: List.generate((constraints.constrainWidth()/15).floor(), (index) => const SizedBox(
+                          children: List.generate((constraints.constrainWidth()/15).floor(), (index) =>  SizedBox(
                               width: 5, height: 1,
                               child: DecoratedBox(
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: isColor==null?Colors.white:Colors.grey.shade300,
                                   )
                               )
                           )),
@@ -140,12 +146,12 @@ class TicketView extends StatelessWidget {
                       },
                     ),
                   )),
-                  const SizedBox( // untuk membuat potongan setengah lingkaran pada tiket
+                   SizedBox( // untuk membuat potongan setengah lingkaran pada tiket
                     height: 20,
                     width: 10,
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: isColor==null?Colors.grey.shade200:Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(10),
                               bottomLeft: Radius.circular(10)
@@ -160,7 +166,7 @@ class TicketView extends StatelessWidget {
             Container(
               decoration:  BoxDecoration( // untuk memberikan border pada container
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(21), bottomRight: Radius.circular(21)),
-                  color: Styles.orangeColor
+                  color: isColor==null?Styles.orangeColor:Colors.white
               ),
               padding: const EdgeInsets.all(10),
               child: Column(
@@ -173,12 +179,12 @@ class TicketView extends StatelessWidget {
                         children: [
                           Text(
                             ticket['date'],
-                            style: Styles.headLineStyle3.copyWith(color: Colors.white),
+                            style: isColor==null?Styles.headLineStyle3.copyWith(color: Colors.white): Styles.headLineStyle3,
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Date",
-                            style: Styles.headLineStyle4.copyWith(color: Colors.white),
+                            style: isColor==null?Styles.headLineStyle4.copyWith(color: Colors.white): Styles.headLineStyle4,
                           )
                         ],
                       ),
@@ -187,12 +193,12 @@ class TicketView extends StatelessWidget {
                         children: [
                           Text(
                             ticket['departure_time'],
-                            style: Styles.headLineStyle3.copyWith(color: Colors.white),
+                            style: isColor==null? Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Departure Time",
-                            style: Styles.headLineStyle4.copyWith(color: Colors.white),
+                            style: isColor==null? Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,
                           )
                         ],
                       ),
@@ -202,12 +208,12 @@ class TicketView extends StatelessWidget {
                           Text(
                             // karena number bertipe data int di app_info_list, maka harus diubah ke string
                             ticket['number'].toString(),
-                            style: Styles.headLineStyle3.copyWith(color: Colors.white),
+                            style: isColor==null?Styles.headLineStyle3.copyWith(color: Colors.white):Styles.headLineStyle3,
                           ),
                           SizedBox(height: 5),
                           Text(
                             "Number",
-                            style: Styles.headLineStyle4.copyWith(color: Colors.white),
+                            style: isColor==null?Styles.headLineStyle4.copyWith(color: Colors.white):Styles.headLineStyle4,
                           )
                         ],
                       ),

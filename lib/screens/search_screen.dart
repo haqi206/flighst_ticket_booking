@@ -2,6 +2,7 @@ import 'package:book_tickets/utils/app_layout.dart';
 import 'package:book_tickets/utils/app_styles.dart';
 import 'package:book_tickets/widgets/double_text_widget.dart';
 import 'package:book_tickets/widgets/icon_text_widget.dart';
+import 'package:book_tickets/widgets/ticket_tabs.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -21,43 +22,7 @@ class SearchScreen extends StatelessWidget {
             style: Styles.headLineStyle1.copyWith(fontSize: 35),
           ),
           SizedBox(height: 20),
-          FittedBox( // untuk mengatur ukuran widget sesuai dengan ukuran layar
-            child: Container(
-              padding: const EdgeInsets.all(3.5),
-              child: Row(
-                /// Airline Tickets
-                children: [
-                  Container(
-                    width: size.width * 44,
-                    padding: const EdgeInsets.symmetric(vertical: 7),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
-                        color: Colors.white
-                    ),
-                    child: Center(
-                      child: Text("Airline Ticket"),
-                    ),
-                  ),
-                  /// Hotels
-                  Container(
-                    width: size.width * 44,
-                    padding: const EdgeInsets.symmetric(vertical: 7),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
-                        color: Colors.transparent
-                    ),
-                    child: Center(
-                      child: Text("Hotels"),
-                    ),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: const Color(0xFFF4F6FD)
-              ),
-            ),
-          ),
+          const AppTicketTabs(firstTab: "Airline Tickets", secondTab: "Hotels"),
           SizedBox(height: 25),
           const IconTextWidget(icon: Icons.flight_takeoff_rounded, text: 'Departure'),
           SizedBox(height: 20),
