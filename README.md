@@ -4,7 +4,7 @@ This repository contains the frontend code for a simple Flight Ticket Booking mo
 
 ## Features
 In this application you will find the following features:
-* 4 screens: ***Home***, ***Search***, ***Profile***, ***Settings***
+* 4 screens: ***Home***, ***Search***, ***Tickets***, ***Profile***
 * Home screen: Displays search bar, list of upcoming flights, and card list of hotels
 
 ## Getting Started
