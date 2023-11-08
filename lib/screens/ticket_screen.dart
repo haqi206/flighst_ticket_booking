@@ -65,14 +65,14 @@ class TicketScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   Image.asset("images/visa.png", scale: 11),
-                                  Text("*** 2462", style: Styles.headLineStyle3)
+                                  Text(" *** 2462", style: Styles.headLineStyle3)
                                 ]
                               ),
                               SizedBox(height: 5),
                               Text("Payment Method", style: Styles.headLineStyle4),
                             ],
                           ),
-                          const AppColumnLayout(text1: "\S249.99", text2:"Price", alignment: CrossAxisAlignment.end, isColor: true),
+                          const AppColumnLayout(text1: "\$249.99", text2:"Price", alignment: CrossAxisAlignment.end, isColor: true),
                         ],
                       )
                     ],

@@ -168,20 +168,20 @@ class TicketView extends StatelessWidget {
                           text1: ticket['date'],
                           text2: "Date",
                           alignment: CrossAxisAlignment.start,
-                          isColor: false
+                          isColor: isColor
                       ),
                       AppColumnLayout(
                           text1: ticket['departure_time'],
                           text2: "Departure Time",
                           alignment: CrossAxisAlignment.center,
-                          isColor: false
+                          isColor: isColor
                       ),
                       AppColumnLayout(
                         // karena number bertipe data int di app_info_list, maka harus diubah ke string
                           text1: ticket['number'].toString(),
                           text2: "Number",
                           alignment: CrossAxisAlignment.end,
-                          isColor: false
+                          isColor: isColor
                       ),
                     ]
                   )
